@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3 text-center"> Simple book library</h1>
+        <button type="button" class="btn btn-secondary mt-3" data-toggle="modal" data-target="#exampleModalCenter">
+            Add Book
+          </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Add book</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="book-form">
+                      <div id="valid-fields" class="alert alert-danger col-10 ml-2" style="display: none;">
+                        Please complete all fields before submitting
+                      </div> 
+                      <div id="success" class="alert alert-success col-8 ml-2" style="display: none;">
+                        Your data added sucessfully
+                      </div> 
+                        <div class="form-group">
+                          <label for="name">Name:</label>
+                          <input type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter book name">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">AuthorName:</label>
+                            <input type="text" class="form-control" id="author" aria-describedby="nameHelp" placeholder="Enter author name">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Publish Date:</label>
+                            <input type="date" class="form-control" id="date" aria-describedby="nameHelp" placeholder="Enter date">
+                          </div>
+                          <div class="form-group">
+                            <label for="availability">Availability:</label>
+                            <input type="text" class="form-control" id="availability" aria-describedby="nameHelp" placeholder="Enter book Availability">
+                          </div>
+                          <div class="form-group">
+                            <label for="pages">No of Pages:</label>
+                            <input type="number" class="form-control" id="pages" aria-describedby="nameHelp" placeholder="Enter no of pages">
+                          </div>
+                        <button type="submit" class="btn btn-primary" onclick="addBook()">Submit</button>
+                      </form>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+          <!-- table -->
+          <table class="table table-striped table-dark mt-5">
+            <thead>
+              <tr>
+                <th>Book name</th>
+                <th>Author name</th>
+                <th>Date</th>
+                <th>Instoke</th>
+                <th>No of Pages</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="book-list">
+              <tr>
+                <td>programming</td>
+                <td>hamza khan</td>
+                <td>7/12/23</td>
+                <td>instock</td> 
+                <td>
+                  200
+                </td>
+                <td>
+                  <a href="" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-warning btn-sm edit">Edit</a>
+                  <a href="#"  class="btn btn-danger btn-sm delete">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
