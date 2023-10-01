@@ -7,7 +7,7 @@ function addBook(){
         const availability = document.getElementById("availability").value;
         const pages = document.getElementById("pages").value;
     if(name && author && date && availability && pages){
-        const book ={
+        const book ={ 
             name,
             author,
             date, 
@@ -43,14 +43,24 @@ function addBook(){
   }
 
   function displayBooks() {
-    bookList.sort((a,b) => a.name.localeCompare(b.name)) //sorting names
-     
+
+    if(localStorage.getItem('bookList') !==null && bookList.length > 0) {
+        document.getElementById("info").style.display = "none";
+    }
+    else{
+  // If there is no data in localStorage then show the message.
+        document.getElementById("info").style.display = "block";
+    }
+
+    
     const bookTable = document.getElementById("book-list");
     bookTable.innerHTML = ""; // Clear the table
 
     for (let i = 0; i < bookList.length; i++) {
         const book = bookList[i];
         const newRow = bookTable.insertRow();
+        
+        
         newRow.innerHTML = `
             <td>${book.name}</td>
             <td>${book.author}</td>
@@ -63,16 +73,55 @@ function addBook(){
                 <a href="#" class="btn btn-danger btn-sm delete" onclick="deleteBook(${i})">Delete</a>
             </td>
         `;
-    }
+    } 
 }
+
+// let isDescending = false;
+
+// function nameDesc() {
+//     // Toggle the sorting order flag
+//     isDescending = !isDescending;
+
+//     // Sort the bookList array by name in ascending or descending order
+//     bookList.sort((a, b) => {
+//         if (isDescending) {
+//             return b.name.localeCompare(a.name); // Sorting in descending order
+//         } else {
+//             return a.name.localeCompare(b.name); // Sorting in ascending order
+//         }
+//     });
+
+//     displayBooks();
+// }
+
+
+let isDescending = false;
+function nameDesc(){
+    isDescending =! isDescending;
+    bookList.sort((a,b) =>{
+        if(isDescending){
+            return b.name.localeCompare(a.name);
+        }
+        else{
+            return a.name.localeCompare(b.name);
+        }
+
+    });
+    displayBooks();
+}
+ 
+
 //  load book data from local storage
 window.addEventListener('load',()=>{
     const data = localStorage.getItem('bookList')
     if(data){
         bookList = JSON.parse(data);
+        bookList.sort((a,b)=> a.name.localeCompare(b.name));
+
         displayBooks();
     }
-})
+});
+
 
 // delete function
     function deleteBook(index) {
@@ -101,7 +150,7 @@ window.addEventListener('load',()=>{
         };
     }
     
-   
+
     function updateBook(index){
         const name =  document.getElementById('name').value;
         const author = document.getElementById('author').value;
@@ -122,4 +171,6 @@ window.addEventListener('load',()=>{
             displayBooks();
             }
         }
+
+        
         

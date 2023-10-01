@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Library</title>
     <script src="scripts.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
         <h1 class="mt-3 text-center"> Simple book library</h1>
+        
         <button type="button" class="btn btn-secondary mt-3" data-toggle="modal" data-target="#exampleModalCenter">
             Add Book
           </button>
+          <div style="font-size: 18px;" id="descending" class="mt-1">
+            <button class="btn btn-primary" onclick="nameDesc()"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
+          </div>
           
           <!-- Modal -->
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -72,21 +77,11 @@
               </tr>
             </thead>
             <tbody id="book-list">
-              <tr>
-                <td>programming</td>
-                <td>hamza khan</td>
-                <td>7/12/23</td>
-                <td>instock</td> 
-                <td>
-                  200
-                </td>
-                <td>
-                  <a href=""  class="btn btn-warning btn-sm edit">Edit</a>
-                  <a href="#"  class="btn btn-danger btn-sm delete">Delete</a>
-                </td>
-              </tr>
+             
             </tbody>
+            
           </table>
+          <p class="mt-3 alert alert-danger" id="info">Please Click on Add button and Enter your book record </p>
     </div>
   
 
