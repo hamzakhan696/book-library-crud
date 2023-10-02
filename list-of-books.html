@@ -15,9 +15,18 @@
         <button type="button" class="btn btn-secondary mt-3" data-toggle="modal" data-target="#exampleModalCenter">
             Add Book
           </button>
+          <div class="d-flex">
           <div style="font-size: 18px;" id="descending" class="mt-1">
             <button class="btn btn-primary" onclick="nameDesc()"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
           </div>
+          <div class="input-group justify-content-end">
+            <div class="form-outline d-flex justify-content-">
+              <label class="form-label mr-2 mt-1" style="font-weight: 600; font-size: 18px;" for="form1">Search:</label>
+              <input type="search" id="search" onkeyup="searchBar()" class="form-control" /> 
+            </div>
+          </div>
+        </div>
+          <p id="delete" class="alert alert-danger mt-2 col-6" style="display: none;" >book deleted successfully</p>
           
           <!-- Modal -->
           <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -30,7 +39,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="book-form">
+                    <form action="#" id="book-form">
                       <div id="valid-fields" class="alert alert-danger col-10 ml-2" style="display: none;">
                         Please complete all fields before submitting
                       </div> 
@@ -51,13 +60,26 @@
                           </div>
                           <div class="form-group">
                             <label for="availability">Availability:</label>
-                            <input type="text" class="form-control" id="availability" aria-describedby="nameHelp" placeholder="Enter book Availability">
-                          </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="availability" id="availability-true" value="true">
+                                <label class="form-check-label" for="availability-true">
+                                    True
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="availability" id="availability-false" value="false">
+                                <label class="form-check-label" for="availability-false">
+                                    False
+                                </label>
+                            </div>
+                        </div>
                           <div class="form-group">
                             <label for="pages">No of Pages:</label>
                             <input type="number" class="form-control" id="pages" aria-describedby="nameHelp" placeholder="Enter no of pages">
                           </div>
-                        <button type="submit" class="btn btn-primary" onclick="addBook()">Submit</button>
+                         
+                         
+                        <button type="submit" class="btn btn-primary" onclick="addBook()" >Submit</button>
                       </form>
                 </div>
                
@@ -71,7 +93,7 @@
                 <th>Book name</th>
                 <th>Author name</th>
                 <th>Date</th>
-                <th>Instoke</th>
+                <th>Availibility</th>
                 <th>No of Pages</th>
                 <th>Actions</th>
               </tr>

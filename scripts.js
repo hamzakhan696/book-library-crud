@@ -3,10 +3,12 @@ let bookList = [];
 function addBook(){
         const name = document.getElementById("name").value;
         const author = document.getElementById("author").value;
-        const date = document.getElementById("date").value;
-        const availability = document.getElementById("availability").value;
+        const date = document.getElementById("date").value; 
+    // Get the selected value of the radio button for "Availability"
+    const availabilityTrue = document.getElementById("availability-true").checked;
+    let availability = availabilityTrue ? "Yes" : "No";
         const pages = document.getElementById("pages").value;
-    if(name && author && date && availability && pages){
+        if(name && author && date && availability && pages){
         const book ={ 
             name,
             author,
@@ -25,6 +27,7 @@ function addBook(){
             document.getElementById("valid-fields").style.display = "block";
             document.getElementById("success").style.display = "none"}; 
 }
+
 
   function saveDataToLocalStorage() {
     localStorage.setItem('bookList', JSON.stringify(bookList));
@@ -52,7 +55,6 @@ function addBook(){
         document.getElementById("info").style.display = "block";
     }
 
-    
     const bookTable = document.getElementById("book-list");
     bookTable.innerHTML = ""; // Clear the table
 
@@ -76,24 +78,6 @@ function addBook(){
     } 
 }
 
-// let isDescending = false;
-
-// function nameDesc() {
-//     // Toggle the sorting order flag
-//     isDescending = !isDescending;
-
-//     // Sort the bookList array by name in ascending or descending order
-//     bookList.sort((a, b) => {
-//         if (isDescending) {
-//             return b.name.localeCompare(a.name); // Sorting in descending order
-//         } else {
-//             return a.name.localeCompare(b.name); // Sorting in ascending order
-//         }
-//     });
-
-//     displayBooks();
-// }
-
 
 let isDescending = false;
 function nameDesc(){
@@ -109,7 +93,6 @@ function nameDesc(){
     });
     displayBooks();
 }
- 
 
 //  load book data from local storage
 window.addEventListener('load',()=>{
@@ -122,11 +105,14 @@ window.addEventListener('load',()=>{
     }
 });
 
-
 // delete function
     function deleteBook(index) {
         if (confirm("Are you sure you want to delete this book?")) {
             bookList.splice(index, 1);
+            document.getElementById("delete").style.display = "block";
+            setTimeout(function(){
+                document.getElementById("delete").style.display = "none";
+            },3000); 
             saveDataToLocalStorage();
             displayBooks();
         }
@@ -137,7 +123,11 @@ window.addEventListener('load',()=>{
         document.getElementById("name").value = book.name;
         document.getElementById("author").value = book.author;
         document.getElementById("date").value = book.date;
-        document.getElementById("availability").value = book.availability;
+    
+        // Set the selected value of the radio button for "Availability"
+        const availabilityRadio = book.availability === "Yes" ? "availability-true" : "availability-false";
+        document.getElementById(availabilityRadio).checked = true;
+    
         document.getElementById("pages").value = book.pages;
     
         // Remove the edited book from the list temporarily
@@ -150,12 +140,13 @@ window.addEventListener('load',()=>{
         };
     }
     
-
     function updateBook(index){
         const name =  document.getElementById('name').value;
         const author = document.getElementById('author').value;
         const date = document.getElementById('date').value;
-        const availability = document.getElementById('availability').value;
+         // Get the selected value of the radio button for "Availability"
+    const availabilityTrue = document.getElementById("availability-true").checked;
+    let availability = availabilityTrue ? "Yes" : "No";
         const pages = document.getElementById('pages').value;
         if(name && author && date && availability && pages){
             let updatedBookObj ={
@@ -166,11 +157,42 @@ window.addEventListener('load',()=>{
                 pages
             }
             bookList.splice(index, 0 , updatedBookObj);
+            
             saveDataToLocalStorage();
             clearform();
             displayBooks();
             }
         }
-
+        function searchBar() {
+            let searchInput = document.getElementById("search");
+            let filter = searchInput.value.toUpperCase();
+            let table = document.getElementById("book-list"); 
+            let rows = table.getElementsByTagName("tr");
+        
+            for (let i = 0; i < rows.length; i++) {
+                let row = rows[i];
+                let cells = row.getElementsByTagName("td"); 
+        
+                let rowMatchesFilter = false;
+        
+                for (let j = 0; j < cells.length; j++) {
+                    let cell = cells[j];
+                    let cellText = cell.textContent || cell.innerText; // Get the text content of the cell
+        
+                    if (cellText.toUpperCase().indexOf(filter) > -1) {
+                        rowMatchesFilter = true;
+                        break; // No need to check other cells in the row if one matches
+                    }
+                }
+        
+                // Show or hide the row based on whether it matches the filter
+                if (rowMatchesFilter) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+        
         
         
